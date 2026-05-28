@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply font-sans bg-white text-navy-900 antialiased;
+    font-feature-settings: 'cv02','cv03','cv04','cv11';
+  }
+  ::selection { @apply bg-gold-500 text-white; }
+}
+
+@layer components {
+  .container-px { @apply px-5 sm:px-8 lg:px-12 xl:px-16; }
+  .section { @apply py-20 lg:py-28; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold
+           transition-all duration-300 tracking-wide text-sm;
+  }
+  .btn-gold {
+    @apply btn text-white shadow-gold;
+    background-image: linear-gradient(135deg,#e6b633 0%,#c9a227 50%,#a87f1d 100%);
+  }
+  .btn-gold:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+  .btn-navy {
+    @apply btn bg-navy-900 text-white hover:bg-navy-800 shadow-navy;
+  }
+  .btn-outline {
+    @apply btn border-2 border-gold-500 text-gold-600 hover:bg-gold-500 hover:text-white;
+  }
+  .btn-ghost-light {
+    @apply btn border-2 border-white/40 text-white hover:bg-white hover:text-navy-900 backdrop-blur-sm;
+  }
+
+  .glass {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+  .glass-light {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201,162,39,0.18);
+  }
+
+  .gold-text {
+    background: linear-gradient(135deg,#f4df8e 0%,#c9a227 50%,#825e1a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .heading-display { @apply font-display font-bold tracking-tight; }
+
+  .gold-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c9a227 50%, transparent);
+  }
+
+  .card-premium {
+    @apply relative bg-white rounded-2xl overflow-hidden border border-gold-100
+           shadow-[0_8px_32px_rgba(10,26,61,0.06)] transition-all duration-500;
+  }
+  .card-premium:hover {
+    @apply shadow-gold border-gold-300;
+    transform: translateY(-6px);
+  }
+
+  .product-img-zoom { transition: transform 0.7s ease; }
+  .group:hover .product-img-zoom { transform: scale(1.08); }
+
+  .nav-link {
+    @apply relative font-medium text-sm tracking-wide transition-colors;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 h-0.5 w-0 bg-gold-500 transition-all duration-300;
+  }
+  .nav-link:hover::after, .nav-link.active::after { @apply w-full; }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gold-200 bg-white text-navy-900
+           focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent
+           transition-all placeholder:text-navy-300;
+  }
+  .label-field { @apply block text-sm font-semibold text-navy-800 mb-1.5; }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+  }
+  .badge-stock { @apply badge bg-emerald-50 text-emerald-700 border border-emerald-200; }
+  .badge-out   { @apply badge bg-rose-50 text-rose-700 border border-rose-200; }
+  .badge-limited { @apply badge bg-amber-50 text-amber-700 border border-amber-200; }
+
+  .gold-border-glow {
+    position: relative;
+  }
+  .gold-border-glow::before {
+    content: '';
+    position: absolute; inset: -1px;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(135deg,#f4df8e,#c9a227,#825e1a,#c9a227,#f4df8e);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity: 0; transition: opacity 0.5s;
+    pointer-events: none;
+  }
+  .group:hover .gold-border-glow::before, .gold-border-glow.always::before { opacity: 1; }
+}
+
+/* Masonry / scrollbar */
+.scroll-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: #c9a227; border-radius: 4px; }
+.scroll-thin::-webkit-scrollbar-track { background: #f5f5f5; }
