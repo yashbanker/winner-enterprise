@@ -14,17 +14,20 @@ const seed = async () => {
 
   // Admin user
   const email = process.env.ADMIN_EMAIL || 'admin@winnerenterprise.com';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'Yash123';
   const existing = await User.findOne({ email });
   if (!existing) {
     await User.create({
       name: process.env.ADMIN_NAME || 'Winner Admin',
       email,
-      password: process.env.ADMIN_PASSWORD || 'Winner@2026',
+      password: adminPassword,
       role: 'admin',
     });
     console.log(`✅ Admin user created: ${email}`);
   } else {
-    console.log(`↪ Admin user already exists: ${email}`);
+    existing.password = adminPassword;
+    await existing.save();
+    console.log(`✅ Admin password updated for existing admin: ${email}`);
   }
 
   // Categories
